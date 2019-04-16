@@ -1,11 +1,9 @@
-/*.App {
-  text-align: center;
-}*/
-
 #items-grid {
   padding: 5%;
 }
 
-#item-image-sold {
-  filter: brightness(20%);
+#dimmer-sold {
+  color: white;
+  font-size: 2em;
+  font-weight: bold; 
 }
