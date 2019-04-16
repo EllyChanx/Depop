@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ItemView from './ItemView';
-import { Button, Grid } from 'semantic-ui-react'
+import { Button, Grid, Label } from 'semantic-ui-react'
 
 class HomePage extends Component {
 
@@ -27,21 +27,18 @@ class HomePage extends Component {
 
   render() {
     let shownItems;
-    if (this.state.showAll) {
-      shownItems = this.state.products;
-    } else {
-      shownItems = this.state.unsold;
-    }
+    this.state.showAll? shownItems = this.state.products : shownItems = this.state.unsold;
 
     return (
       <div>
         <p> HomePage </p>
         <Button toggle active={!this.state.showAll} onClick={this.handleOnClick} id='button-hide-sold'> Hide Sold Items </Button>
+        <br />
         <Grid doubling divided columns={4} id='items-grid'>
         {shownItems.map(item => {
           return (
             <Grid.Column key={item.id}>
-            <ItemView data={item} />
+              <ItemView data={item} />
             </Grid.Column>
           )
         })}

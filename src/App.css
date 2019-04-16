@@ -13,3 +13,16 @@
   right: 5%;
   clear: left;
 }
+
+#button-like {
+  position: absolute;
+  right: 5%;
+  margin: 10px 0px 10px 10px;
+  width: 3em;
+  z-index: 999;
+  border: 2px;
+}
+
+/*.ui.inverted.button:focus {
+  background-color: rgba(0,0,0,0) !important;
+}*/
