@@ -7,3 +7,9 @@
   font-size: 2em;
   font-weight: bold; 
 }
+
+#button-hide-sold {
+  position: absolute;
+  right: 5%;
+  clear: left;
+}

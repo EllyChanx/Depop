@@ -22,7 +22,7 @@ class HomePage extends Component {
   }
 
   handleOnClick = () => {
-    this.setState({ showAll: false })
+    this.state.showAll ? this.setState({ showAll: false }) : this.setState({ showAll: true })
   }
 
   render() {
@@ -34,10 +34,9 @@ class HomePage extends Component {
     }
 
     return (
-
       <div>
         <p> HomePage </p>
-        <Button onClick={this.handleOnClick}> Hide Sold Items </Button>
+        <Button toggle active={!this.state.showAll} onClick={this.handleOnClick} id='button-hide-sold'> Hide Sold Items </Button>
         <Grid doubling divided columns={4} id='items-grid'>
         {shownItems.map(item => {
           return (
