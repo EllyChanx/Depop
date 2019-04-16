@@ -2,6 +2,10 @@
   text-align: center;
 }*/
 
-/*.item-image {
-  max-width: 250px;
-}*/
+#items-grid {
+  padding: 5%;
+}
+
+#item-image-sold {
+  filter: brightness(20%);
+}

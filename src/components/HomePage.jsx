@@ -18,12 +18,11 @@ class HomePage extends Component {
     return (
       <div>
         <p> HomePage </p>
-
-        <Grid relaxed doubling columns={4}>
+        <Grid doubling divided columns={4} id='items-grid'>
         {products.map(item => {
           return (
-            <Grid.Column>
-            <ItemView data={item} key={item.id} />
+            <Grid.Column key={item.id}>
+            <ItemView data={item} />
             </Grid.Column>
           )
         })}
