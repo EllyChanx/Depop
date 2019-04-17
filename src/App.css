@@ -41,8 +41,8 @@ h1 {
 #like-dropdown {
   display: block;
   position: absolute;
-  top: 3%;
-  right: 1%;
+  top: 5%;
+  right: 4%;
   font-weight: bold;
   z-index: 50;
 }
