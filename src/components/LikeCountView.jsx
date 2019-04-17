@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Menu } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 
 function LikeCountView(props) {
   let likeStatus = props.likeStatus;
@@ -16,7 +16,7 @@ function LikeCountView(props) {
         <Dropdown.Menu>
           {itemsAry.map(item => {
             if (likeStatus[item]) { 
-              return <Dropdown.Item key={itemsAry.indexOf(item)}> {item} </Dropdown.Item> 
+              return (<Dropdown.Item key={itemsAry.indexOf(item)} id='like-dropdown-items'> {item} </Dropdown.Item> )
             }
           })}
         </Dropdown.Menu>

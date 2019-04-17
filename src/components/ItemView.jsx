@@ -3,10 +3,6 @@ import { Card, Image, Dimmer, Button } from 'semantic-ui-react';
 
 class ItemView extends Component {
 
-  constructor() {
-    super();
-  }
-
   handleOnClick = (itemTitle, itemLiked) => {
     if (itemLiked) {
       this.props.likeStorage(itemTitle, false)

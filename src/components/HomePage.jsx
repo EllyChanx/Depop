@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ItemView from './ItemView';
 import LikeCountView from './LikeCountView';
-import { Button, Grid, Dropdown, Menu } from 'semantic-ui-react'
+import { Button, Grid } from 'semantic-ui-react'
 
 class HomePage extends Component {
 
@@ -18,8 +18,8 @@ class HomePage extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({ products: data});
-      data.map(item => { if (!item.sold) { unsoldProducts.push(item) } });
-      data.map(item => { let likeStatus = {...this.state.likeStatus};
+      data.forEach(item => { if (!item.sold) { unsoldProducts.push(item) } });
+      data.forEach(item => { let likeStatus = {...this.state.likeStatus};
       likeStatus[item.title] = false;
       this.setState({likeStatus})
       })
@@ -44,16 +44,15 @@ class HomePage extends Component {
   render() {
     let shownItems;
     this.state.showAll? shownItems = this.state.products : shownItems = this.state.unsold;
-    let {liked}  = this.state
     let {likeStatus} = this.state
     return (
       <div>
-        <h2> A Random Store! </h2>
+        <h1> A Random Store! </h1>
         <LikeCountView likeStatus={likeStatus}/>
         <Button toggle active={!this.state.showAll} 
                 onClick={this.handleOnClick} 
                 id='button-hide-sold'> Hide Sold Items </Button>
-        <br />
+
         <Grid doubling divided columns={4} id='items-grid'>
         {shownItems.map(item => {
           return (
