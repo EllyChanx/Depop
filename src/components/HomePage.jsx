@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import ItemView from './ItemView';
-import { Button, Grid, Label } from 'semantic-ui-react'
+import { Button, Grid } from 'semantic-ui-react'
 
 class HomePage extends Component {
 
   state = { 
     products: [],
     unsold: [],
-    showAll: true
+    showAll: true,
+    liked: []
   }
 
   componentDidMount = () => {
@@ -25,10 +26,21 @@ class HomePage extends Component {
     this.state.showAll ? this.setState({ showAll: false }) : this.setState({ showAll: true })
   }
 
+  updateLikedItems = (itemTitle, like) => {
+    if (like) {
+      var addedItems = this.state.liked.concat(itemTitle)
+      this.setState({ liked: addedItems })
+    } else {
+      var likedItems = this.state.liked
+      likedItems.splice(likedItems.indexOf(itemTitle), 1)
+      this.setState({ liked: likedItems })
+    }
+  }
+
   render() {
     let shownItems;
     this.state.showAll? shownItems = this.state.products : shownItems = this.state.unsold;
-
+    console.log(this.state.liked)
     return (
       <div>
         <p> HomePage </p>
@@ -38,7 +50,7 @@ class HomePage extends Component {
         {shownItems.map(item => {
           return (
             <Grid.Column key={item.id}>
-              <ItemView data={item} />
+              <ItemView data={item} likeStorage={this.updateLikedItems} />
             </Grid.Column>
           )
         })}

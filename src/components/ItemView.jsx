@@ -3,12 +3,21 @@ import { Card, Image, Dimmer, Button } from 'semantic-ui-react';
 
 class ItemView extends Component {
 
-  state = {
-    liked: false
+  constructor() {
+    super();
+    this.state = {
+      liked: false
+    }
   }
 
-  handleOnClick = () => {
-    this.state.liked ? this.setState({ liked: false }) : this.setState({ liked: true })
+  handleOnClick = (itemTitle) => {
+    if (this.state.liked) {
+      this.setState({ liked: false })
+      this.props.likeStorage(itemTitle, false)
+    } else {
+      this.setState({ liked: true })
+      this.props.likeStorage(itemTitle, true)
+    }
   }
 
   render () {
@@ -22,7 +31,7 @@ class ItemView extends Component {
           icon='thumbs up outline'
           inverted={!this.state.liked} 
           color={this.state.liked? 'red': null}
-          onClick={() => this.handleOnClick()} />
+          onClick={() => this.handleOnClick(item.title)} />
         
 
         <Dimmer.Dimmable >
