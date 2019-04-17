@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ItemView from './ItemView';
+import ItemLikes from './ItemLikes';
 import { Button, Grid, Dropdown, Menu } from 'semantic-ui-react'
 
 class HomePage extends Component {
@@ -8,7 +9,8 @@ class HomePage extends Component {
     products: [],
     unsold: [],
     showAll: true,
-    liked: []
+    liked: [],
+    likeStatus: {}
   }
 
   componentDidMount = () => {
@@ -17,9 +19,13 @@ class HomePage extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({ products: data});
-      data.map(item => { if (!item.sold) {unsoldProducts.push(item)}})
+      data.map(item => { if (!item.sold) { unsoldProducts.push(item) } });
+      data.map(item => { let likeStatus = {...this.state.likeStatus};
+      likeStatus[item.title] = false;
+      this.setState({likeStatus})
+      })
     })
-    this.setState({ unsold: unsoldProducts} )
+    this.setState({ unsold: unsoldProducts } )
   }
 
   handleOnClick = () => {
@@ -27,21 +33,21 @@ class HomePage extends Component {
   }
 
   updateLikedItems = (itemTitle, like) => {
+    let likeStatus = {...this.state.likeStatus};
     if (like) {
-      var addedItems = this.state.liked.concat(itemTitle)
-      this.setState({ liked: addedItems })
+      likeStatus[itemTitle] = true;
     } else {
-      var likedItems = this.state.liked
-      likedItems.splice(likedItems.indexOf(itemTitle), 1)
-      this.setState({ liked: likedItems })
+      likeStatus[itemTitle] = false;
     }
+    this.setState({likeStatus})
   }
 
   render() {
     let shownItems;
     this.state.showAll? shownItems = this.state.products : shownItems = this.state.unsold;
     let {liked}  = this.state
-    console.log(liked)
+    let {likeStatus} = this.state
+    console.log(likeStatus)
     return (
       <div>
         <h2> A Random Store! </h2>
@@ -66,11 +72,12 @@ class HomePage extends Component {
         {shownItems.map(item => {
           return (
             <Grid.Column key={item.id}>
-              <ItemView data={item} likeStorage={this.updateLikedItems} />
+              <ItemView data={item} liked={likeStatus[item.title]} likeStorage={this.updateLikedItems} />
             </Grid.Column>
           )
         })}
         </Grid>
+
       </div>
     );
   }
