@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ItemLikes from './ItemLikes';
 import { Card, Image, Dimmer, Button } from 'semantic-ui-react';
 
 class ItemView extends Component {

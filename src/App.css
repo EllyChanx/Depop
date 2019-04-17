@@ -30,7 +30,7 @@ h2 {
   right: 5%;
   margin: 10px 0px 10px 10px;
   width: 3em;
-  z-index: 999;
+  z-index: 30;
   border: 2px;
 }
 
@@ -43,4 +43,5 @@ h2 {
   position: absolute;
   top: 3%;
   right: 1%;
+  z-index: 50;
 }
