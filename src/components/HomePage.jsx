@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ItemView from './ItemView';
-import { Button, Grid } from 'semantic-ui-react'
+import { Button, Grid, Dropdown, Menu } from 'semantic-ui-react'
 
 class HomePage extends Component {
 
@@ -40,10 +40,26 @@ class HomePage extends Component {
   render() {
     let shownItems;
     this.state.showAll? shownItems = this.state.products : shownItems = this.state.unsold;
-    console.log(this.state.liked)
+    let {liked}  = this.state
+    console.log(liked)
     return (
       <div>
-        <p> HomePage </p>
+        <h2> A Random Store! </h2>
+        
+        <Dropdown text={liked.length? liked.length.toString() :'0'} 
+                  icon='thumbs up outline'
+                  pointing='top right' 
+                  floating labeled button 
+                  className='icon' 
+                  id='like-dropdown'>
+          <Dropdown.Menu>
+            {liked.map(item => {
+              return ( <Dropdown.Item key={liked.indexOf(item)}>{item}</Dropdown.Item> )
+            })}
+
+          </Dropdown.Menu>
+        </Dropdown>
+
         <Button toggle active={!this.state.showAll} onClick={this.handleOnClick} id='button-hide-sold'> Hide Sold Items </Button>
         <br />
         <Grid doubling divided columns={4} id='items-grid'>
